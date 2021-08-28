@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzy.mapper.QuestionAnswerMapper">
+    <resultMap id="rm" type="QuestionAnswer">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="item_a" jdbcType="VARCHAR" property="itemA"/>
+        <result column="item_b" jdbcType="VARCHAR" property="itemB"/>
+        <result column="item_c" jdbcType="VARCHAR" property="itemC"/>
+        <result column="item_d" jdbcType="VARCHAR" property="itemD"/>
+        <result column="answer" jdbcType="VARCHAR" property="answer"/>
+        <result column="score"  jdbcType="INTEGER" property="score"/>
+        <result column="course_id" jdbcType="INTEGER" property="courseId"/>
+        <result column="question_id" jdbcType="INTEGER" property="questionId"/>
+    </resultMap>
+    <!--查询全部习题信息-->
+    <select id="selectQuestions" parameterType="QuestionAnswer" resultMap="rm">
+        select * from question_answer  where course_id=#{id};
+    </select>
+    <!--查询单个课程的习题信息-->
+    <select id="selectQuestionAndAnswer" parameterType="Course" resultMap="rm">
+        select * from question_answer where course_id=#{courseId} and question_id=#{i};
+    </select>
+</mapper>

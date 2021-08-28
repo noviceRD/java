@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzy.mapper.UserMapper" >
+  <resultMap id="rm" type="com.xzy.domain.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="role" property="role" jdbcType="INTEGER" />
+  </resultMap>
+  <!--根据用户名查询用户信息-->
+  <select id="selectUserByName" parameterType="User" resultMap="rm">
+    select * from user where name=#{name};
+  </select>
+  <!--根据用户id查询用户信息-->
+  <select id="selectUserById" parameterType="User" resultMap="rm">
+    select * from user where id=#{id};
+  </select>
+  <!--添加用户信息-->
+  <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into user (id, name, password, role)
+    values (#{id}, #{name}, #{password}, #{role});
+  </insert>
+  <!--根据用户id删除用户信息-->
+  <delete id="deleteUserById">
+    delete from user where id=#{id};
+  </delete>
+  <!--根据用户名修改用户信息-->
+  <update id="updateUserByName" parameterType="User">
+    update user
+    set id = #{user.id}, name = #{user.name},password = #{user.password},role = #{user.role} where name=#{name};
+  </update>
+  <!--根据用户id修改用户信息-->
+  <update id="updateUserById" parameterType="User">
+    update user
+    set id = #{user.id}, name = #{user.name},password = #{user.password},role = #{user.role} where id=#{id};
+  </update>
+</mapper>
